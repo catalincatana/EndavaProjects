@@ -59,9 +59,9 @@ public class Generics<K,V> implements Pair<K,V> {
         masinute.add(logan);
         System.out.println(masinute.get(0));
 
-    //Nu putem adauga obiecte care nu sunt de tipul sau subtipul clasei generice
+    //Nu putem adauga obiecte care nu sunt de tipul sau subtipul clasei generic
         Avion boeing = new Avion();
-        //masinute.add(boeing);
+        masinute.add(boeing);
 
         System.out.println("============");
         Integer p1 = 36;
