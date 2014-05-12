@@ -1,0 +1,42 @@
+CREATE TABLE Departament (Cod_Departament int NOT NULL CHECK (Cod_Departament >0),Denumire_Departament varchar(255) unique NOT NULL, PRIMARY KEY(Cod_Departament)) ;
+CREATE TABLE Salariat ( Marca_Salariat int NOT NULL CHECK (Marca_Salariat >0),Nume_Salariat varchar(255) NOT NULL, Data_nastere datetime, Salariu int , Cod_Departament int NOT NULL CHECK (Cod_Departament >0),PRIMARY KEY (Marca_Salariat),
+FOREIGN KEY (Cod_Departament) REFERENCES Departament(Cod_Departament)) ;
+
+ALTER TABLE Salariat
+modify COLUMN Data_nastere date;
+
+insert into departament (Cod_Departament, Denumire_Departament) values  (1,'IT');
+insert into departament (Cod_Departament, Denumire_Departament) values  (3,'TESTING');
+
+insert into salariat (Marca_Salariat,Nume_Salariat,Data_nastere,Salariu,Cod_Departament) values (1,'Gigel','1988-03-05',2000,1);
+insert into salariat (Marca_Salariat,Nume_Salariat,Data_nastere,Salariu,Cod_Departament) values (2,'Marius','1992-08-30',1000,2);
+insert into salariat (Marca_Salariat,Nume_Salariat,Data_nastere,Salariu,Cod_Departament) values (3,'Catalin','1992-08-29',1000,1);
+insert into salariat (Marca_Salariat,Nume_Salariat,Data_nastere,Salariu,Cod_Departament) values (4,'Dani','1992-08-29',1000,3);
+insert into salariat (Marca_Salariat,Nume_Salariat,Data_nastere,Salariu,Cod_Departament) values (5,'Ioana','1992-08-29',1000,3);
+insert into salariat (Marca_Salariat,Nume_Salariat,Data_nastere,Salariu,Cod_Departament) values (6,'DANA','1992-08-29',1000,3);
+
+UPDATE Salariat
+SET Data_nastere = '1994-2-10' 
+WHERE Marca_Salariat=1
+
+Exercitiile:
+SELECT * FROM endava.salariat;
+
+2.1
+UPDATE Salariat
+SET Salariu = Salariu - Salariu *0.1 
+WHERE Cod_Departament=1;
+
+2.2 si 2.3
+Select max(Salariu),D.Denumire_Departament from Salariat S join departament D on S.Cod_Departament=D.Cod_Departament group by S.Cod_Departament;
+Select max(Salariu),D.Denumire_Departament from Salariat S join departament D on S.Cod_Departament=D.Cod_Departament group by S.Cod_Departament having D.Denumire_Departament like 'T%' and count(S.Marca_Salariat)>2;
+
+2.4 (prima variant nu ar merge din cauza ca facem select pe o tabela pe care trebuie sa o modificam) ?! :D
+update Salariat 
+Set Salariu = (Salariu + Salariu * 0.1)
+where Cod_Departament = (select D.Cod_Departament from Departament D join Salariat S on S.Cod_Departament = D.Cod_Departament group by S.Cod_Departament having count(S.Marca_Salariat) = 1);
+
+//Aceasta varianta merge!!
+update Salariat 
+Set Salariu = (Salariu + Salariu * 0.1)
+where Cod_Departament = (select T.CodDep from (select S.Cod_Departament as CodDep, count(S.Marca_Salariat) from Salariat S group by S.Cod_Departament having count(S.Marca_Salariat) = 1) as T)
