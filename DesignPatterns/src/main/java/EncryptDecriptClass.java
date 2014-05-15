@@ -7,7 +7,6 @@ import java.util.HashMap;
 public class EncryptDecriptClass implements EncryptDecrypt {
     @Override
     public String encryptAL(String sir) {
-       // final long startTime = System.currentTimeMillis();
 
         ArrayList<LetterMapping> lt = TestClass.generatesArrayList();
         String listaFinala="";
@@ -23,44 +22,38 @@ public class EncryptDecriptClass implements EncryptDecrypt {
             }
 
         }
-      //  final long endTime = System.currentTimeMillis();
 
-     //   System.out.println("Total execution time Encrypt1AL: " + (endTime - startTime) );
 
         return listaFinala;
     }
 
     @Override
     public String decryptAL(String sir) {
-       // final long startTime = System.currentTimeMillis();
 
         ArrayList<LetterMapping> lt = TestClass.generatesArrayList();
         String listaFinala="";
         String partial="";
-
+        int counter = 0;
         for(int i=0;i<sir.length();i++) {
-            while (String.valueOf(sir.charAt(i)) != " ") {
+
+            if (!(String.valueOf(sir.charAt(i)).equals(" "))) {
                 partial = partial + String.valueOf(sir.charAt(i));
+
+            }else{
+                for (int j = 0; j < lt.size(); j++) {
+                    if (partial.equals(Integer.toString(lt.get(j).i))) {
+                        listaFinala = listaFinala + String.valueOf(lt.get(j).s);
+                    }
+                }
+                partial = "";
             }
         }
-            for(int j=0;j<lt.size();j++){
 
-                if(partial .equals( Integer.toString(lt.get(j).i))) {
-                    listaFinala = listaFinala + String.valueOf(lt.get(j).s);
-                }
-            }
-
-
-
-      //  final long endTime = System.currentTimeMillis();
-
-      //  System.out.println("Total execution time Decrypt1AL: " + (endTime - startTime) );
         return listaFinala;
     }
 
     @Override
     public String encryptHMP(String sir) {
-        final long startTime = System.currentTimeMillis();
 
         HashMap<String, Integer> hmlst = TestClass.generatesHashMap();
         String listaFinala="";
@@ -69,37 +62,41 @@ public class EncryptDecriptClass implements EncryptDecrypt {
 
                 if(hmlst.containsKey(String.valueOf(sir.charAt(i)))){
 
-                    listaFinala = listaFinala + hmlst.get(String.valueOf(sir.charAt(i)));
+                    listaFinala = listaFinala + hmlst.get(String.valueOf(sir.charAt(i))) + " ";
 
                 }
 
         }
 
-        final long endTime = System.currentTimeMillis();
 
-        System.out.println("Total execution time(Encrypt1HMP): " + (endTime - startTime) );
         return listaFinala;
     }
 
     @Override
     public String decryptHMP(String sir) {
-        final long startTime = System.currentTimeMillis();
+
 
         HashMap<String, Integer> hmlst = TestClass.generatesHashMap();
         String listaFinala="";
+        String partial="";
 
         for(int i=0;i<sir.length();i++){
+            if (!(String.valueOf(sir.charAt(i)).equals(" "))) {
+                partial = partial + String.valueOf(sir.charAt(i));
 
-            //hmlst.get(s) intoarce un integer asa ca in Integer.parseInt(String.valueOf(sir.charAt(i)))) convertesc char-ul in string apoi in integer
-            for(String s : hmlst.keySet()){
-                if(hmlst.get(s).equals(Integer.parseInt(String.valueOf(sir.charAt(i)))))
-                    listaFinala = listaFinala + s;
+            }else {
+                //hmlst.get(s) intoarce un integer asa ca in Integer.parseInt(String.valueOf(sir.charAt(i)))) convertesc char-ul in string apoi in integer
+                for (String s : hmlst.keySet()) {
+
+                    if (hmlst.get(s).equals(Integer.parseInt(partial)))
+                        listaFinala = listaFinala + s;
+
+                }
+                partial="";
+
             }
-
         }
-        final long endTime = System.currentTimeMillis();
 
-        System.out.println("Total execution time(decrypt1HMP): " + (endTime - startTime) );
         return listaFinala;
     }
 }

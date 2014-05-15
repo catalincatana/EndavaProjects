@@ -8,6 +8,7 @@ import java.util.*;
  */
 public class TestClass {
     private static Random r = new Random();
+    private static Random r2 = new Random();
 
     public static void main(String[] args) {
 
@@ -28,6 +29,8 @@ public class TestClass {
             EncryptDecrypt edc;
 
             edc = afs.createFactory(AbstractFactorySingleton.TipuriCriptari.Criptare1);
+            /*Testul local*/
+
 /*
             String sir="ABC";
             
@@ -164,14 +167,14 @@ public class TestClass {
             writerHMP = new BufferedWriter(new FileWriter(fileHMP));
             for(int i=0;i<100;i++){
                 linieHMP="";
-                String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                String alphabet2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 for (int j = 0; j < 80; j++) {
-                    linieHMP = linieHMP + alphabet.charAt(r.nextInt(alphabet.length()));
+                    linieHMP = linieHMP + alphabet2.charAt(r2.nextInt(alphabet2.length()));
                 } // prints 50 random characters from alphabet
                 writerHMP.write(linieHMP );
                 writerHMP.newLine();
             }
-            writer.close();
+            writerHMP.close();
 
          /*Citirea din fisier si criptare*/
             BufferedReader brHMP = new BufferedReader(new FileReader(fileHMP));
@@ -179,8 +182,8 @@ public class TestClass {
 
             final long startTimeHMP = System.currentTimeMillis();
             while ((lineHMP = brHMP.readLine()) != null) {
-                String cryptedLine = edc.encryptHMP(line);
-                writer2HMP.write(cryptedLine);
+                String cryptedLineHMP = edc.encryptHMP(lineHMP);
+                writer2HMP.write(cryptedLineHMP);
                 writer2HMP.newLine();
 
             }
@@ -197,16 +200,17 @@ public class TestClass {
 
             final long startTimeDecryptHMP = System.currentTimeMillis();
             while ((line2HMP = br2HMP.readLine()) != null) {
-                String cryptedLine = edc.decryptHMP(line2HMP);
-                writer3HMP.write(cryptedLine);
+                String cryptedLineHMP2 = edc.decryptHMP(line2HMP);
+                writer3HMP.write(cryptedLineHMP2);
                 writer3HMP.newLine();
+
             }
 
             final long endTimeDecryptHMP = System.currentTimeMillis();
 
             System.out.println("Total execution time Decrypt1HMP: " + (endTimeDecryptHMP - startTimeDecryptHMP) );
-            br2.close();
-            writer3.close();
+            br2HMP.close();
+            writer3HMP.close();
 
 
 

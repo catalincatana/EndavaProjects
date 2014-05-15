@@ -27,8 +27,7 @@ public class AbstractFactorySingleton  {
             case Criptare1: return new EncryptDecriptClass();
             //case Criptare2: return new EncryptDecriptClass2();
         }
-        throw new IllegalArgumentException("Nu este un tip de pizza valid!");
+        throw new IllegalArgumentException("Nu este un tip de criptare valid!");
     }
-    //de facut cu enum {tip1 si tip2)
-    //de facut metoda create in functie de enum(tip1-> sau tip2->)
+
 }
