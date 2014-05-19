@@ -15,6 +15,16 @@
         <servlet-class>DeleteServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>SelectServlet</servlet-name>
+        <servlet-class>SelectServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>UpdateServlet</servlet-name>
+        <servlet-class>UpdateServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
@@ -23,6 +33,16 @@
     <servlet-mapping>
         <servlet-name>DeleteServlet</servlet-name>
         <url-pattern>/DeleteServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SelectServlet</servlet-name>
+        <url-pattern>/SelectServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UpdateServlet</servlet-name>
+        <url-pattern>/UpdateServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>
