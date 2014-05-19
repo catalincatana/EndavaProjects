@@ -13,5 +13,13 @@
     <INPUT TYPE="submit" VALUE="Go To Delete">
 </FORM>
 
+<FORM METHOD="LINK" ACTION="showDep.jsp">
+    <INPUT TYPE="submit" VALUE="Go To Reading!">
+</FORM>
+
+<FORM METHOD="LINK" ACTION="update.jsp">
+    <INPUT TYPE="submit" VALUE="Go To Update!">
+</FORM>
+
 </body>
 </html>
